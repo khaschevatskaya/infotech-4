@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ChemSpace — Chemoinformatics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head>
+<body data-page="home"><canvas id="bg"></canvas>
+<nav><a class="logo" href="index.html"><svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="url(#lg)" stroke-width="3">
+<defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#2ee6c5"/><stop offset="1" stop-color="#8b7cff"/></linearGradient></defs>
+<polygon points="20,3 35,11.5 35,28.5 20,37 5,28.5 5,11.5"/><circle cx="20" cy="20" r="6"/></svg><span>ChemSpace</span></a>
+<div class="links"><a href="index.html" data-p="home">Home</a><a href="molecules.html" data-p="molecules">Molecules</a><a href="workflow.html" data-p="workflow">Workflow</a></div></nav>
+<main>
+<section class="hero">
+  <div>
+    <div class="tag reveal">Chemistry × Computer Science</div>
+    <h1 class="reveal d1">Turning <span class="grad">molecules</span><br>into data.</h1>
+    <p class="lead reveal d2">Chemoinformatics uses algorithms, databases and machine learning to represent, search and predict the behaviour of chemical compounds — from the first hit to the final drug.</p>
+    <div class="reveal d3" style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn primary" href="molecules.html">Explore molecules →</a>
+      <a class="btn" href="workflow.html">See the workflow</a>
+    </div>
+    <div class="smiles-type mono reveal d3"><small id="typedname"></small><span id="typed"></span><span class="caret"></span></div>
+  </div>
+  <div style="text-align:center">
+    <canvas id="mol3d"></canvas>
+    <div style="display:flex;justify-content:center;align-items:center;gap:14px;color:var(--muted);font-size:.9rem">
+      <span>Now showing: <b id="molname" style="color:var(--text)"></b></span>
+      <button class="btn" id="nextmol" style="padding:8px 14px">Next molecule ↻</button>
+    </div>
+    <div class="hint">Drag to rotate · structure is generated live from SMILES</div>
+  </div>
+</section>
+
+<section>
+  <div class="stats">
+    <div class="stat reveal"><b class="grad" data-count="100" data-suffix="M+">0</b><span>compounds in public databases</span></div>
+    <div class="stat reveal d1"><b class="grad" data-count="60" data-suffix="">0</b><span>orders of magnitude: est. drug-like chemical space (10<sup>60</sup>)</span></div>
+    <div class="stat reveal d2"><b class="grad" data-count="4" data-suffix="">0</b><span>criteria in Lipinski's "Rule of Five" for oral drugs</span></div>
+    <div class="stat reveal d3"><b class="grad" data-count="1" data-dec="0" data-suffix=" string">0</b><span>is all SMILES needs to encode a molecule</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="tag reveal">Core ideas</div>
+  <h2 class="reveal">What chemoinformatics does</h2>
+  <div class="grid" style="margin-top:28px">
+    <div class="card reveal"><div class="icon">⌬</div><h3>Representation</h3><p>Molecules become machine-readable as line notations (SMILES, InChI), connection tables and molecular graphs.</p></div>
+    <div class="card reveal d1"><div class="icon">⚖</div><h3>Descriptors</h3><p>Numbers that summarise a structure: molecular weight, logP, hydrogen-bond donors, polar surface area and thousands more.</p></div>
+    <div class="card reveal d2"><div class="icon">⧉</div><h3>Similarity search</h3><p>Binary fingerprints and the Tanimoto coefficient find close analogues among millions of compounds in seconds.</p></div>
+    <div class="card reveal d3"><div class="icon">◎</div><h3>QSAR &amp; ML</h3><p>Models link structure to activity, toxicity or solubility so chemists can prioritise which compounds to make.</p></div>
+  </div>
+</section>
+
+<section class="reveal" style="text-align:center">
+  <h2>Ready to look inside a molecule?</h2>
+  <p class="lead" style="margin:12px auto 26px">Paste any SMILES string and watch it fold into a 3D model, with descriptors computed in your browser.</p>
+  <a class="btn primary" href="molecules.html">Open the SMILES analyzer →</a>
+</section>
+</main>
+<footer><span>© <span id="year"></span> ChemSpace · An interactive introduction to chemoinformatics</span><span>Built with vanilla HTML, CSS &amp; JavaScript</span></footer>
+<script src="main.js"></script></body></html>

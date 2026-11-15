@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Workflow — ChemSpace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head>
+<body data-page="workflow"><canvas id="bg"></canvas>
+<nav><a class="logo" href="index.html"><svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="url(#lg)" stroke-width="3">
+<defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#2ee6c5"/><stop offset="1" stop-color="#8b7cff"/></linearGradient></defs>
+<polygon points="20,3 35,11.5 35,28.5 20,37 5,28.5 5,11.5"/><circle cx="20" cy="20" r="6"/></svg><span>ChemSpace</span></a>
+<div class="links"><a href="index.html" data-p="home">Home</a><a href="molecules.html" data-p="molecules">Molecules</a><a href="workflow.html" data-p="workflow">Workflow</a></div></nav>
+<main>
+<section>
+  <div class="tag reveal">From data to drugs</div>
+  <h1 class="reveal d1" style="font-size:clamp(2rem,4vw,3rem)">The virtual <span class="grad">screening</span> pipeline</h1>
+  <p class="lead reveal d2">How a chemoinformatics workflow narrows an enormous compound library down to a handful of candidates worth testing in the lab.</p>
+  <div class="timeline">
+    <div class="line"></div><div class="fill"></div>
+    <div class="step" data-n="1"><h3>Collect &amp; curate</h3><p>Pull structures and bioactivity from databases such as PubChem and ChEMBL. Standardise them: remove salts, fix charges, normalise tautomers and drop duplicates.</p></div>
+    <div class="step" data-n="2"><h3>Encode</h3><p>Convert each molecule into numbers — descriptors (MW, logP, TPSA) and fingerprints (path-based, ECFP/Morgan) — so algorithms can compare them.</p></div>
+    <div class="step" data-n="3"><h3>Filter</h3><p>Apply drug-likeness rules such as Lipinski's Rule of Five, and remove reactive or assay-interfering substructures (PAINS).</p></div>
+    <div class="step" data-n="4"><h3>Search &amp; model</h3><p>Rank by similarity to known actives, dock into a protein target, or score with QSAR / machine-learning models trained on measured activities.</p></div>
+    <div class="step" data-n="5"><h3>Select &amp; test</h3><p>Pick a diverse, high-scoring subset for synthesis and assays. Results feed back into the models — the design–make–test–analyse loop.</p></div>
+  </div>
+</section>
+
+<section id="fpSection">
+  <div class="tag reveal">Live demo</div>
+  <h2 class="reveal">Fingerprints &amp; Tanimoto similarity</h2>
+  <p class="lead reveal" style="margin-top:6px">Each molecule is broken into atom paths (up to 5 atoms long). Every path is hashed to one of 128 bits. Similar molecules light up similar bits.</p>
+  <div class="fp-wrap">
+    <div class="card reveal">
+      <div class="input-row"><select id="molA"></select><select id="molB"></select><button class="btn primary" id="cmpBtn">Compare</button></div>
+      <h3 style="margin-top:18px;font-size:.95rem;color:var(--teal)">Molecule A</h3><div class="bits" id="bitsA"></div>
+      <h3 style="margin-top:16px;font-size:.95rem;color:var(--violet)">Molecule B</h3><div class="bits" id="bitsB"></div>
+      <div class="legend"><span><i style="background:var(--teal)"></i>A only</span><span><i style="background:var(--violet)"></i>B only</span><span><i style="background:var(--pink)"></i>shared</span></div>
+    </div>
+    <div class="card reveal d1">
+      <h3>Tanimoto coefficient</h3>
+      <p>T = |A ∩ B| / |A ∪ B|. A score of 1 means identical fingerprints; above ~0.7 usually signals close analogues.</p>
+      <div class="gauge">
+        <svg viewBox="0 0 150 150"><defs><linearGradient id="gg"><stop offset="0" stop-color="#2ee6c5"/><stop offset="1" stop-color="#ff6fa8"/></linearGradient></defs>
+          <circle class="track" cx="75" cy="75" r="60"/><circle class="val" cx="75" cy="75" r="60"/></svg>
+        <div><b id="tani" class="mono grad" style="font-size:2.8rem">0.00</b><div id="taniInfo" style="color:var(--muted);font-size:.85rem;margin-top:6px"></div></div>
+      </div>
+      <p class="hint" style="margin-top:14px">Try Dopamine vs Serotonin (related neurotransmitters), then Dopamine vs Cholesterol.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="tag reveal">Chemical space</div>
+  <h2 class="reveal">Mapping drug-likeness</h2>
+  <p class="lead reveal" style="margin-top:6px">Molecular weight vs logP for the gallery molecules. Green points satisfy every Rule-of-Five criterion; pink ones break at least one. Hover a point for details.</p>
+  <div class="card reveal" style="position:relative">
+    <canvas id="space"></canvas>
+    <div id="spaceTip" style="position:absolute;pointer-events:none;opacity:0;transition:opacity .2s;background:var(--bg);border:1px solid var(--line);padding:8px 12px;border-radius:10px;font-size:.82rem"></div>
+  </div>
+</section>
+</main>
+<footer><span>© <span id="year"></span> ChemSpace · An interactive introduction to chemoinformatics</span><span>Built with vanilla HTML, CSS &amp; JavaScript</span></footer>
+<script src="main.js"></script></body></html>

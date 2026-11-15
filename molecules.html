@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Molecules — ChemSpace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head>
+<body data-page="molecules"><canvas id="bg"></canvas>
+<nav><a class="logo" href="index.html"><svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="url(#lg)" stroke-width="3">
+<defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#2ee6c5"/><stop offset="1" stop-color="#8b7cff"/></linearGradient></defs>
+<polygon points="20,3 35,11.5 35,28.5 20,37 5,28.5 5,11.5"/><circle cx="20" cy="20" r="6"/></svg><span>ChemSpace</span></a>
+<div class="links"><a href="index.html" data-p="home">Home</a><a href="molecules.html" data-p="molecules">Molecules</a><a href="workflow.html" data-p="workflow">Workflow</a></div></nav>
+<main>
+<section>
+  <div class="tag reveal">Interactive tool</div>
+  <h1 class="reveal d1" style="font-size:clamp(2rem,4vw,3rem)">SMILES <span class="grad">analyzer</span></h1>
+  <p class="lead reveal d2">SMILES (Simplified Molecular Input Line Entry System) writes a molecule as text: atoms as letters, bonds as <code>=</code> or <code>#</code>, branches in brackets, rings as digits. Type one below.</p>
+  <div class="analyzer">
+    <div class="card reveal">
+      <div class="input-row"><input type="text" id="smiIn" spellcheck="false" placeholder="e.g. CC(=O)OC1=CC=CC=C1C(=O)O"><button class="btn primary" id="anaBtn">Analyze</button></div>
+      <div class="err" id="err"></div>
+      <div class="chips" id="chips"></div>
+      <canvas id="anaCanvas" style="width:100%;height:280px;margin-top:10px;cursor:grab"></canvas>
+    </div>
+    <div class="card reveal d1">
+      <h3 style="margin-bottom:14px">Computed descriptors</h3>
+      <div class="results">
+        <div class="res"><span>Formula</span><b id="rFormula">—</b></div>
+        <div class="res"><span>Molecular weight</span><b id="rMW">—</b></div>
+        <div class="res"><span>Heavy atoms</span><b id="rHeavy">—</b></div>
+        <div class="res"><span>Rings</span><b id="rRings">—</b></div>
+        <div class="res"><span>H-bond donors</span><b id="rHBD">—</b></div>
+        <div class="res"><span>H-bond acceptors (N+O)</span><b id="rHBA">—</b></div>
+        <div class="res"><span>Rotatable bonds</span><b id="rRot">—</b></div>
+        <div class="res"><span>Ro5 violations (excl. logP)</span><b id="rLip">—</b></div>
+      </div>
+      <p class="hint" style="margin-top:14px">Supports the organic subset (B C N O P S F Cl Br I), aromatic lowercase atoms, bracket atoms like <code>[nH]</code>, branches and ring closures. Stereo marks are ignored.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="tag reveal">Gallery</div>
+  <h2 class="reveal">Famous molecules</h2>
+  <p class="lead reveal" style="margin-top:6px">Every model below is built in real time from its SMILES. Click a card to see its drug-likeness profile.</p>
+  <div class="grid" id="gallery"></div>
+</section>
+</main>
+<footer><span>© <span id="year"></span> ChemSpace · An interactive introduction to chemoinformatics</span><span>Built with vanilla HTML, CSS &amp; JavaScript</span></footer>
+<script src="main.js"></script></body></html>
